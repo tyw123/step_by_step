@@ -16,8 +16,10 @@ public class HelloWorldTest {
     @Test
     public void should_be_mocked(){
         HelloWorld helloWorld = mock(HelloWorld.class);
-        when(helloWorld.beenCalled()).thenReturn("Leave me alone.");
+        when(helloWorld.beenCalled()).thenReturn("eave me alone.");
 
-        assertThat(helloWorld.beenCalled(), is("Leave me alone."));
+        assertThat(helloWorld.beenCalled(), is("eave me alone."));
     }
+
+
 }
