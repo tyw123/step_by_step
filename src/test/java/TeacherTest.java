@@ -10,9 +10,12 @@ import static org.junit.Assert.assertThat;
 public class TeacherTest {
     Klass sndClass=new Klass(2);
     Klass fstClass=new Klass(1);
+    Klass[] klass={sndClass};
+    Klass[] klasses={fstClass,sndClass};
+    Klass[] emptyClasses={};
     @Test
     public void should_teacher_test_introduce_return_name_age_and_klass(){
-        assertThat(new Teacher("Tom",21,sndClass).introduce(),is("My name is Tom. I am 21 years old. I am a Teacher. I teach Class 2."));
+        assertThat(new Teacher("Tom",21,klass).introduce(),is("My name is Tom. I am 21 years old. I am a Teacher. I teach Class 2."));
     }
     @Test
     public void should_teacher_test_introduce_return_name_and_age(){
@@ -20,10 +23,18 @@ public class TeacherTest {
     }
     @Test
     public void should_teacher_test_introduceWith_return_name_age_and_no_student(){
-        assertThat(new Teacher("Tom", 21,sndClass).introduceWith(new Student("Jerry",21,fstClass)),is("My name is Tom. I am 21 years old. I am a Teacher. I don't teach Jerry."));
+        assertThat(new Teacher("Tom", 21,klass).introduceWith(new Student("Jerry",21,fstClass)),is("My name is Tom. I am 21 years old. I am a Teacher. I don't teach Jerry."));
     }
     @Test
     public void should_teacher_test_introduceWith_return_name_age_and_student(){
-        assertThat(new Teacher("Tom", 21,sndClass).introduceWith(new Student("Jerry",21,sndClass)),is("My name is Tom. I am 21 years old. I am a Teacher. I teach Jerry."));
+        assertThat(new Teacher("Tom", 21,klass).introduceWith(new Student("Jerry",21,sndClass)),is("My name is Tom. I am 21 years old. I am a Teacher. I teach Jerry."));
+    }
+    @Test
+    public void should_teacher_test_introduce_return_classes(){
+        assertThat(new Teacher("Tom", 21,klasses).introduce(),is("My name is Tom. I am 21 years old. I am a Teacher. I teach Class 1, 2."));
+    }
+    @Test
+    public void should_teacher_test_introduce_return_empty_classes(){
+        assertThat(new Teacher("Tom", 21,emptyClasses).introduce(),is("My name is Tom. I am 21 years old. I am a Teacher. I teach No Class."));
     }
 }
