@@ -20,9 +20,17 @@ public class Klass {
 
     public Student getLeader(){return leader;}
 
-    public Student assignLeader(Student leader) {
-        this.leader=leader;
-        return leader;
+    public String assignLeader(Student leader) {
+        if(leader.getKlass()==this){
+            this.leader=leader;
+            return "yes";
+        }else {
+            return "It is not one of us.";
+        }
     }
 
+    public Klass appendMember(Student student) {
+        student.setKlass(this);
+        return this;
+    }
 }

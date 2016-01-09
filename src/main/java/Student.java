@@ -13,7 +13,6 @@ public class Student extends Person {
     public Student(String name, Klass klass) {
         super(name);
         this.klass=klass;
-       // this.getKlass().setLeader(false);
     }
 
     public Student(String name, int age, Klass klass, boolean leader) {
@@ -25,12 +24,21 @@ public class Student extends Person {
 
     }
 
+    public Student(String name) {
+        super(name);
+    }
+
     public  String introduce() {
         if(this.getKlass().getLeader()==this){
             return super.introduce() + " I am a Student. I am Leader of Class " + klass.getKlass() + ".";
         }else {
             return super.introduce() + " I am a Student. I am at Class " + klass.getKlass() + ".";
         }
+    }
+
+    public Klass setKlass(Klass klass){
+        this.klass=klass;
+        return klass;
     }
     public Klass getKlass(){return klass;}
 }

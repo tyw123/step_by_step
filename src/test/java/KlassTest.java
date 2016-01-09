@@ -17,15 +17,22 @@ public class KlassTest {
     public void should_klass_assignLeader_return_student_class(){
         Klass sndClass=new Klass(2);
         Student tom=new Student("Tom",sndClass);
+        sndClass.assignLeader(tom);
        // System.out.print(tom.getKlass().getLeader());
-        assertThat(sndClass.assignLeader(tom),is(tom.getKlass().getLeader()));
+        assertThat(sndClass.getLeader(),is(tom.getKlass().getLeader()));
        // System.out.print(tom.getKlass().getLeader());
     }
-//    @Test
-//    public void should_klass_appendMember_return_student_class(){
-//        Student tom=new Student("Tom");
-//        // System.out.print(tom.getKlass().getLeader());
-//        assertThat(new Klass().appendMember(tom),is(tom.getKlass().getLeader()));
-//        // System.out.print(tom.getKlass().getLeader());
-//    }
+    @Test
+    public void should_klass_appendMember_return_student_class(){
+        Klass sndClass=new Klass(2);
+        Student tom=new Student("Tom");
+        assertThat(sndClass.appendMember(tom),is(tom.getKlass()));
+    }
+    @Test
+    public void should_klass_assignLeader_return_failed(){
+        Klass secondClass=new Klass(2);
+        Klass firstClass=new Klass(1);
+        Student tom=new Student("Tom",firstClass);
+        assertThat(secondClass.assignLeader(tom),is("It is not one of us."));
+    }
 }
