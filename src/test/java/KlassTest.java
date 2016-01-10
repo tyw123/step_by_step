@@ -53,4 +53,5 @@ public class KlassTest {
         assertThat(thirdClass.getTeacher(),is(Alice));
         assertThat(thirdClass.isIn(Alice.getClasses()),is(true));
     }
+
 }

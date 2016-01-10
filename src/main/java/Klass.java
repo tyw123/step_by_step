@@ -7,6 +7,8 @@ public class Klass {
     private int klass;
     private Student leader;
     private Teacher teacher;
+    private Listen listen;
+    private Komputer komputer;
 
     public Klass(int klass) {
 
@@ -22,7 +24,15 @@ public class Klass {
     public Klass() {
        // this.leader=false;
     }
-
+    public void setListen(Listen listen){
+        this.listen=listen;
+    }
+    public String executeAddStudent(Student student,Klass klass){
+        return listen.listenAddStudent(student,klass);
+    }
+    public String executeAssignLeader(Student leader,Klass klass){
+        return listen.listenAssignLeader(leader,klass);
+    }
     public Teacher setTeacher(Teacher teacher){
         if(teacher!=null) {
             this.teacher = teacher;
@@ -44,7 +54,15 @@ public class Klass {
             if (this.equals(leader.getKlass())) {
                 this.leader = leader;
                 if (this.teacher != null) {
-                    this.teacher.addStudent(leader, this);
+                //    this.teacher.addStudent(leader, this);
+                //    System.out.print(leader);
+                    this.setListen(this.teacher);
+                 //   System.out.print(this.listen);
+                    this.executeAssignLeader(leader,this);
+                    if(this.komputer!=null) {
+                        this.setListen(this.komputer);
+                        this.executeAssignLeader(leader, this);
+                    }
                 }
                 return "yes";
             } else {
@@ -60,6 +78,12 @@ public class Klass {
             student.setKlass(this);
             if (this.teacher != null) {
                 this.teacher.addStudent(student, this);
+                this.setListen(this.teacher);
+                this.executeAddStudent(student,this);
+                if(this.komputer!=null) {
+                    this.setListen(this.komputer);
+                    this.executeAddStudent(student, this);
+                }
             }
         }
             return this;
@@ -100,5 +124,8 @@ public class Klass {
         }else {
             return false;
         }
+    }
+    public void setKomputer(Komputer komputer){
+     this.komputer=komputer;
     }
 }

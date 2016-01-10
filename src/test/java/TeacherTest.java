@@ -1,11 +1,14 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 
 /**
@@ -70,5 +73,21 @@ public class TeacherTest {
         Teacher tom=new Teacher("Tom",sndClass);
         sndClass.assignLeader(Jerry);
         assertThat(tom.addClassLeader(Jerry, sndClass),is("I am Tom. I know Jerry become Leader of Class 2."));
+    }
+    @Test
+    public void should_teacher_listenAddStudent_return_right(){
+        Teacher Tom=new Teacher("Tom",sndClass);
+        sndClass.appendMember(new Student("Jerry"));
+        PrintStream fakedOut = mock(PrintStream.class);
+        Tom.say(fakedOut);
+        verify(fakedOut).println("I am Tom. I know Jerry has joined Class 2.");
+    }
+    @Test
+    public void should_teacher_listenAssignLeader_return_right(){
+        Teacher Tom=new Teacher("Tom",sndClass);
+        sndClass.assignLeader(new Student("Jerry",sndClass));
+        PrintStream fakedOut = mock(PrintStream.class);
+        Tom.say(fakedOut);
+        verify(fakedOut).println("I am Tom. I know Jerry become Leader of Class 2.");
     }
 }

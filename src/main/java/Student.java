@@ -17,7 +17,7 @@ public class Student extends Person {
         super(name);
         if(klass!=null){
             this.klass=klass;
-            klass.appendMember(this);
+           // klass.appendMember(this);
         }
     }
 

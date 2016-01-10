@@ -1,11 +1,15 @@
+import com.sun.corba.se.pept.transport.ListenerThread;
+
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by tyw on 16-1-9.
  */
-public class Teacher extends Person{
+public class Teacher extends Person implements Listen{
     private List<Klass> classes=new ArrayList();
+    String forPrint;
 
     public Teacher(String name, int age, List<Klass>classes) {//居然还跟参数顺序有关系
         super(name, age);
@@ -88,5 +92,28 @@ public class Teacher extends Person{
     }else{
         return "input null.";
     }
+    }
+
+    public void say(PrintStream out) {
+        out.println(forPrint);
+
+    }
+
+    public String listenAddStudent(Student student,Klass klass) {
+        if(student!=null) {
+            forPrint="I am " + this.getName() + ". I know " + student.getName() + " has joined Class " + klass.getKlass() + ".";
+            return forPrint;
+        }else{
+            return "input null.";
+        }
+    }
+
+    public String listenAssignLeader(Student leader,Klass klass) {
+        if(leader!=null||klass!=null) {
+            forPrint="I am "+this.getName()+". I know "+leader.getName()+" become Leader of Class "+klass.getKlass()+".";
+            return  forPrint;
+        }else{
+            return "input null.";
+        }
     }
 }
